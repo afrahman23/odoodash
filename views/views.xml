@@ -1,0 +1,92 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record id="inherit_res_users_tree" model="ir.ui.view">
+      <field name="name">inherit_res_users_tree</field>
+      <field name="model">res.users</field>
+      <field name="inherit_id" ref="base.view_users_tree"></field>
+      <field name="arch" type="xml">
+
+        <!-- Menghilangkan form-form -->
+        <xpath expr="//field[@name='login']" position="replace"></xpath>
+        <xpath expr="//field[@name='lang']" position="replace"></xpath>
+        <xpath expr="//field[@name='login_date']" position="replace"></xpath>
+        <xpath expr="//field[@name='company_id']" position="replace">
+            <field name="ip"/>
+            <field name="mac"/>
+        </xpath>
+      </field>
+    </record>
+
+
+    <record id="inherit_res_users_formulir" model="ir.ui.view">
+      <field name="name">inherit_res_users_formulir</field>
+      <field name="model">res.users</field>
+      <field name="inherit_id" ref="base.view_users_simple_form"></field>
+      <field name="arch" type="xml">
+
+        <!-- Menghilangkan form-form -->
+        <xpath expr="//field[@name='phone']" position="replace"></xpath>
+        <xpath expr="//field[@name='mobile']" position="after">
+            <field name="ip"/>
+            <field name="mac"/>
+        </xpath>
+      </field>
+    </record>
+
+<!--
+    <record model="ir.ui.view" id="dash.list">
+      <field name="name">dash list</field>
+      <field name="model">dash.dash</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="dash_pengguna_action_window">
+      <field name="name">Lis Pengguna</field>
+      <field name="res_model">res.users</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="dash.action_server">
+      <field name="name">dash server</field>
+      <field name="model_id" ref="model_dash_dash"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+
+    <menuitem name="Dashboard Net" id="dash.menu_root"/>
+
+    <!-- menu categories -->
+
+    <!-- <menuitem name="Menu 1" id="dash.menu_1" parent="dash.menu_root"/> -->
+    <!-- <menuitem name="Menu 2" id="dash.menu_2" parent="dash.menu_root"/> -->
+
+    <!-- actions -->
+
+    <menuitem name="Pelanggan" id="dash.menu_1_list" parent="dash.menu_root" action="dash_pengguna_action_window"/>
+    <!-- <menuitem name="Server to list" id="dash" parent="dash.menu_2" action="dash.action_server"/> -->
+
+  </data>
+</odoo>

@@ -1,0 +1,2 @@
+id,name,model_id:id,groups:id,domain_force,perm_read,perm_write,perm_create,perm_unlink
+akses_pengguna_sendiri,"Akses Data Pribadi",model_res_users,dash.group_pengguna,"[('id','=',user.id)]",1,1,0,0
